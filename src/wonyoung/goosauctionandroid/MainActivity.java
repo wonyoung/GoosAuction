@@ -123,19 +123,12 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(createLayout(this));
-	}
-	
-	private View createLayout(Context context) {
-		LinearLayout linearLayout = new LinearLayout(context);
+		setContentView(R.layout.activity_main);
 		
-		snipersListView = new ListView(context);
-		snipers = new SnipersTableModel(context, R.layout.snipers_view);
-		snipersListView.setAdapter(snipers);
+		snipers = new SnipersTableModel(this, R.layout.snipers_view);
 
-		linearLayout.addView(snipersListView);
-		
-		return linearLayout;
+		snipersListView = (ListView) findViewById(R.id.snipersListView);
+		snipersListView.setAdapter(snipers);
 	}
 
 	public void connectToXMPPAndSendAMessage(String hostname, String username, String password,

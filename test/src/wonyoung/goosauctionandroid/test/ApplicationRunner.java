@@ -14,7 +14,7 @@ public class ApplicationRunner {
 
 
 	public ApplicationRunner(Solo solo) {
-		driver = new AuctionSniperDriver(solo);
+		driver = new AuctionSniperDriver(solo, 1000);
 	}
 	
 	public void startBiddingIn(final FakeAuctionServer auction) {

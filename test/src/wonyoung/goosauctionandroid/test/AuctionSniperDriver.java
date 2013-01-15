@@ -1,35 +1,24 @@
 package wonyoung.goosauctionandroid.test;
 
-import static junit.framework.Assert.*;
-import static org.hamcrest.core.IsNull.notNullValue;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static junit.framework.Assert.assertTrue;
 import wonyoung.goosauctionandroid.MainActivity;
-
-import android.view.View;
-import android.widget.ListView;
+import wonyoung.goosauctionandroid.R;
+import android.app.Activity;
 
 import com.jayway.android.robotium.solo.Solo;
+import com.objogate.wl.android.driver.AndroidDriver;
+import com.objogate.wl.android.driver.ListViewDriver;
 
-public class AuctionSniperDriver {
+public class AuctionSniperDriver extends AndroidDriver<Activity>{
 	Solo solo;
 
-	public AuctionSniperDriver(Solo solo) {
+	public AuctionSniperDriver(Solo solo, int timeoutMillis) {
+		super(solo, timeoutMillis);
 		this.solo = solo;
 	}
 
-	public void showSniperStatus(String statusJoining) {
-		assertThat("ListView not found", firstListView(), is(notNullValue()));
-		assertTrue("sniper status is not "+statusJoining, solo.searchText(statusJoining));
-		
-	}
-
-	private ListView firstListView() {
-		for(View view : solo.getViews()) {
-			if (view instanceof ListView)
-				return (ListView) view;
-		}
-		return null;
+	public void showSniperStatus(String status) {
+		new ListViewDriver(this, R.id.snipersListView).hasItem(containsAllStrings(status));
 	}
 
 	public void joinSniper(String hostname, String username,
