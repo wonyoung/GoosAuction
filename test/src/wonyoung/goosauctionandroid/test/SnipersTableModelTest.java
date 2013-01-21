@@ -6,8 +6,9 @@ import org.jmock.integration.junit3.JUnit3Mockery;
 
 import wonyoung.goosauctionandroid.Column;
 import wonyoung.goosauctionandroid.MainActivity;
-import wonyoung.goosauctionandroid.SnipersTableModel;
 import wonyoung.goosauctionandroid.SniperState;
+import wonyoung.goosauctionandroid.SnipersTableModel;
+import wonyoung.goosauctionandroid.SniperSnapShot;
 import android.test.AndroidTestCase;
 
 public class SnipersTableModelTest extends AndroidTestCase {
@@ -30,13 +31,12 @@ public class SnipersTableModelTest extends AndroidTestCase {
 			ignoring(listener);
 //			one(listener).tableChanged(with(aRowChangedEvent()));
 		}});
-		model.sniperStatusChanged(new SniperState("item id", 555, 666),
-				MainActivity.STATUS_BIDDING);
+		model.sniperStatusChanged(new SniperSnapShot("item id", 555, 666, SniperState.BIDDING));
 		
 		assertColumnEquals(Column.ITEM_IDENTIFIER, "item id");
 		assertColumnEquals(Column.LAST_PRICE, 555);
 		assertColumnEquals(Column.LAST_BID, 666);
-		assertColumnEquals(Column.SNIPER_STATUS, MainActivity.STATUS_BIDDING);
+		assertColumnEquals(Column.SNIPER_STATE, MainActivity.STATUS_BIDDING);
 	}
 
 //	protected Matcher<TableModelEvent> aRowChangedEvent() {

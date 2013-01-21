@@ -13,10 +13,17 @@ import android.widget.Toast;
 
 public class SnipersTableModel extends ArrayAdapter<String> {
 
+	private static final String[] StatusText = { 
+		MainActivity.STATUS_JOINING,
+		MainActivity.STATUS_BIDDING,
+		MainActivity.STATUS_WINNING,
+		MainActivity.STATUS_LOST,
+		MainActivity.STATUS_WON
+	};
 	private int resourceId;
-	private final SniperState STARTING_UP = new SniperState("", 0, 0);
+	private final SniperSnapShot STARTING_UP = new SniperSnapShot("", 0, 0, SniperState.JOINNING);
 	private ArrayList<String> texts;
-	private SniperState sniperState = STARTING_UP;
+	private SniperSnapShot sniperState = STARTING_UP;
 	private String statusText = MainActivity.STATUS_JOINING;
 	Context context;
 	public SnipersTableModel(Context context, int textViewResourceId) {
@@ -55,10 +62,9 @@ public class SnipersTableModel extends ArrayAdapter<String> {
 		statusText = status;
 	}
 
-	public void sniperStatusChanged(SniperState newSniperState,
-			String newStatusText) {
+	public void sniperStatusChanged(SniperSnapShot newSniperState) {
 		sniperState = newSniperState;
-		statusText = newStatusText;
+		statusText = StatusText[newSniperState.state.ordinal()];
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
@@ -69,7 +75,7 @@ public class SnipersTableModel extends ArrayAdapter<String> {
 			return sniperState.lastPrice;
 		case LAST_BID:
 			return sniperState.lastBid;
-		case SNIPER_STATUS:
+		case SNIPER_STATE:
 			return statusText;
 		default:
 			throw new IllegalArgumentException("No column at " + columnIndex);

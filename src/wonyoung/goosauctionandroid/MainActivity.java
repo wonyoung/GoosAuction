@@ -43,8 +43,8 @@ public class MainActivity extends Activity {
 		}
 
 		@Override
-		public void sniperBidding(final SniperState state) {
-			sniperStatusChanged(state, STATUS_BIDDING);
+		public void sniperStateChanged(final SniperSnapShot sniperSnapShot) {
+			sniperStatusChanged(sniperSnapShot);
 		}
 	}
 
@@ -171,8 +171,7 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	private void sniperStatusChanged(SniperState sniperState, String statusText) {
-		snipers.sniperStatusChanged(sniperState, statusText);
+	private void sniperStatusChanged(SniperSnapShot sniperState) {
+		snipers.sniperStatusChanged(sniperState);
 	}
-	
 }

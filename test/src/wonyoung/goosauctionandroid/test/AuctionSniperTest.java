@@ -11,6 +11,7 @@ import wonyoung.goosauctionandroid.Auction;
 import wonyoung.goosauctionandroid.AuctionEventListener.PriceSource;
 import wonyoung.goosauctionandroid.AuctionSniper;
 import wonyoung.goosauctionandroid.SniperListener;
+import wonyoung.goosauctionandroid.SniperSnapShot;
 import wonyoung.goosauctionandroid.SniperState;
 
 public class AuctionSniperTest extends TestCase {
@@ -42,8 +43,8 @@ public class AuctionSniperTest extends TestCase {
 		final int bid = price + increment;
 		context.checking(new Expectations() {{
 			ignoring(auction);
-			allowing(sniperListener).sniperBidding(
-					new SniperState(ITEM_ID, price, bid));
+			allowing(sniperListener).sniperStateChanged(
+					new SniperSnapShot(ITEM_ID, price, bid, SniperState.BIDDING));
 				then(sniperState.is("bidding"));
 			atLeast(1).of(sniperListener).sniperLost();
 				when(sniperState.is("bidding"));
@@ -71,8 +72,8 @@ public class AuctionSniperTest extends TestCase {
 		final int bid = price + increment;
 		context.checking(new Expectations() {{
 			one(auction).bid(price + increment);
-			atLeast(1).of(sniperListener).sniperBidding(
-					new SniperState(ITEM_ID, price, bid));
+			atLeast(1).of(sniperListener).sniperStateChanged(
+					new SniperSnapShot(ITEM_ID, price, bid, SniperState.BIDDING));
 			
 		}});
 		
