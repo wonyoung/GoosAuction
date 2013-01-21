@@ -2,6 +2,7 @@ package wonyoung.goosauctionandroid;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +17,9 @@ public class SnipersTableModel extends ArrayAdapter<String> {
 	private static final String[] STATUS_TEXT = { 
 		MainActivity.STATUS_JOINING,
 		MainActivity.STATUS_BIDDING,
-		MainActivity.STATUS_WINNING
+		MainActivity.STATUS_WINNING,
+		MainActivity.STATUS_LOST,
+		MainActivity.STATUS_WON
 	};
 	private int resourceId;
 	private final SniperSnapShot STARTING_UP = new SniperSnapShot("", 0, 0, SniperState.JOINNING);
@@ -62,7 +65,7 @@ public class SnipersTableModel extends ArrayAdapter<String> {
 
 	public void sniperStatusChanged(SniperSnapShot newSniperState) {
 		sniperState = newSniperState;
-		statusText = STATUS_TEXT[newSniperState.state.ordinal()];
+		statusText = STATUS_TEXT[newSniperState.state.ordinal()];	
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {

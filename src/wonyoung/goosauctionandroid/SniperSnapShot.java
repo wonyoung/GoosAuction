@@ -57,8 +57,11 @@ public class SniperSnapShot {
 	}
 
 	public SniperSnapShot winning(int price) {
-		// TODO Auto-generated method stub
 		return new SniperSnapShot(itemId, price, price, SniperState.WINNING);
+	}
+
+	public SniperSnapShot closed() {
+		return new SniperSnapShot(itemId, lastPrice, lastBid, state.whenAuctionClosed());
 	}
 	
 	

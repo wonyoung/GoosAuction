@@ -173,5 +173,12 @@ public class MainActivity extends Activity {
 
 	private void sniperStatusChanged(SniperSnapShot sniperState) {
 		snipers.sniperStatusChanged(sniperState);
+
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				snipers.notifyDataSetChanged();
+			}
+		});	
 	}
 }
