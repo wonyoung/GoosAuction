@@ -47,6 +47,19 @@ public class SniperSnapShot {
 			return false;
 		return true;
 	}
+
+	public static SniperSnapShot joining(String itemId) {
+		return new SniperSnapShot(itemId, 0, 0, SniperState.JOINNING);
+	}
+
+	public SniperSnapShot bidding(int price, int bid) {
+		return new SniperSnapShot(itemId, price, bid, SniperState.BIDDING);
+	}
+
+	public SniperSnapShot winning(int price) {
+		// TODO Auto-generated method stub
+		return new SniperSnapShot(itemId, price, price, SniperState.WINNING);
+	}
 	
 	
 	// TODO: change equals() and hashcode() method with Apache common.lang
