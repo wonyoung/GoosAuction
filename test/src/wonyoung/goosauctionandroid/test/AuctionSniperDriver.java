@@ -1,6 +1,5 @@
 package wonyoung.goosauctionandroid.test;
 
-import static junit.framework.Assert.assertTrue;
 import wonyoung.goosauctionandroid.MainActivity;
 import wonyoung.goosauctionandroid.R;
 import android.app.Activity;
@@ -25,5 +24,21 @@ public class AuctionSniperDriver extends AndroidDriver<Activity>{
 			String password, String itemId) {
 		MainActivity activity = (MainActivity) solo.getCurrentActivity();
 		activity.join(hostname, username, password, itemId);
+	}
+
+	public void showSniperStatus(String itemId, int lastPrice, int lastBid,
+			String status) {
+		ListViewDriver listView = new ListViewDriver(this, R.id.snipersListView);
+
+// TODO: com.objogate.wl.android.matcher.IterableComponentsMatcher.matching
+//		listView.hasItem(matching(containsAllStrings(itemId),
+//						containsAllStrings(String.valueOf(lastPrice)),
+//						containsAllStrings(String.valueOf(lastBid)),
+//						containsAllStrings(status)));
+
+		listView.hasItem(containsAllStrings(itemId));
+		listView.hasItem(containsAllStrings(String.valueOf(lastPrice)));
+		listView.hasItem(containsAllStrings(String.valueOf(lastBid)));
+		listView.hasItem(containsAllStrings(status));
 	}
 }

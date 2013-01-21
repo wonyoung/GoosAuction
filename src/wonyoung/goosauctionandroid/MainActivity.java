@@ -20,37 +20,6 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	public class SnipersTableModel extends ArrayAdapter<String> {
-
-		private int resourceId;
-		private ArrayList<String> texts;
-		public SnipersTableModel(Context context, int textViewResourceId) {
-			super(context, textViewResourceId);
-			this.resourceId = textViewResourceId;
-			texts = new ArrayList<String>();
-			texts.add("(READY)");
-			addAll(texts);
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = convertView;
-			
-			if (view == null) {
-				LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = li.inflate(resourceId, null);
-			}
-			TextView sniperStatus = (TextView) view.findViewById(R.id.sniperStatus);
-			sniperStatus.setText(texts.get(position));
-			
-			return view;
-		}
-		public void setStatusText(String statusJoining) {
-			texts.set(0, statusJoining);
-		}
-
-	}
-
 	public class SniperStateDisplayer implements SniperListener {
 
 		@Override
@@ -71,6 +40,11 @@ public class MainActivity extends Activity {
 		@Override
 		public void sniperWon() {
 			showStatus(STATUS_WON);
+		}
+
+		@Override
+		public void sniperBidding(final SniperState state) {
+			sniperStatusChanged(state, STATUS_BIDDING);
 		}
 	}
 
@@ -143,7 +117,7 @@ public class MainActivity extends Activity {
 		chat.addMessageListener(
 				new AuctionMessageTranslator(
 						sniperId,
-						new AuctionSniper(auction, new SniperStateDisplayer())));
+						new AuctionSniper(itemId, auction, new SniperStateDisplayer())));
 		auction.join();
 	}
 
@@ -194,6 +168,11 @@ public class MainActivity extends Activity {
 			public void run() {
 				snipers.notifyDataSetChanged();
 			}
-		});		
+		});
 	}
+
+	private void sniperStatusChanged(SniperState sniperState, String statusText) {
+		snipers.sniperStatusChanged(sniperState, statusText);
+	}
+	
 }

@@ -5,9 +5,23 @@
     android:orientation="horizontal" >
 
     <TextView
-        android:id="@+id/sniperStatus"
-        android:layout_width="fill_parent"
+        android:id="@+id/item_id"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
          />
-
+    <TextView
+        android:id="@+id/last_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+    <TextView
+        android:id="@+id/last_bid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+    <TextView
+        android:id="@+id/sniper_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />        
 </LinearLayout>
