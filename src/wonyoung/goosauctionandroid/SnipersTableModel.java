@@ -2,7 +2,6 @@ package wonyoung.goosauctionandroid;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,29 +9,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SnipersTableModel extends ArrayAdapter<String> {
 
 	private static final String[] STATUS_TEXT = { 
-		MainActivity.STATUS_JOINING,
-		MainActivity.STATUS_BIDDING,
-		MainActivity.STATUS_WINNING,
-		MainActivity.STATUS_LOST,
-		MainActivity.STATUS_WON
+		"Joining",
+		"Bidding",
+		"Winning",
+		"Lost",
+		"Won"
 	};
 	private int resourceId;
 	private final SniperSnapShot STARTING_UP = new SniperSnapShot("", 0, 0, SniperState.JOINNING);
 	private ArrayList<String> texts;
-	private SniperSnapShot sniperState = STARTING_UP;
-	private String statusText = MainActivity.STATUS_JOINING;
+	private SniperSnapShot snapshot = STARTING_UP;
 	Context context;
 	public SnipersTableModel(Context context, int textViewResourceId) {
 		super(context, textViewResourceId);
 		this.resourceId = textViewResourceId;
 		this.context = context;
 		texts = new ArrayList<String>();
-		texts.add(statusText);
+		texts.add(textFor(snapshot.state));
 		addAll(texts);
 	}
 
@@ -45,42 +42,30 @@ public class SnipersTableModel extends ArrayAdapter<String> {
 			view = li.inflate(resourceId, null);
 		}
 		TextView itemIdTextView = (TextView) view.findViewById(R.id.item_id);
-		itemIdTextView.setText(sniperState.itemId);
+		itemIdTextView.setText(snapshot.itemId);
 		
-		Log.d("AAAA", "[[["+sniperState.itemId+"]]]");
+		Log.d("AAAA", "[[["+snapshot.itemId+"]]]");
 		TextView lastPriceTextView = (TextView) view.findViewById(R.id.last_price);
-		lastPriceTextView.setText(Integer.toString(sniperState.lastPrice));
+		lastPriceTextView.setText(Integer.toString(snapshot.lastPrice));
 		
 		TextView lastBidTextView = (TextView) view.findViewById(R.id.last_bid);
-		lastBidTextView.setText(Integer.toString(sniperState.lastBid));		
+		lastBidTextView.setText(Integer.toString(snapshot.lastBid));		
 		
 		TextView sniperStatusTextView = (TextView) view.findViewById(R.id.sniper_status);
-		sniperStatusTextView.setText(statusText);
+		sniperStatusTextView.setText(textFor(snapshot.state));
 		
 		return view;
 	}
-	public void setStatusText(String status) {
-		statusText = status;
-	}
-
 	public void sniperStatusChanged(SniperSnapShot newSniperState) {
-		sniperState = newSniperState;
-		statusText = STATUS_TEXT[newSniperState.state.ordinal()];	
+		snapshot = newSniperState;
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		switch(Column.at(columnIndex)) {
-		case ITEM_IDENTIFIER:
-			return sniperState.itemId;
-		case LAST_PRICE:
-			return sniperState.lastPrice;
-		case LAST_BID:
-			return sniperState.lastBid;
-		case SNIPER_STATE:
-			return statusText;
-		default:
-			throw new IllegalArgumentException("No column at " + columnIndex);
-		}
+		return Column.at(columnIndex).valueIn(snapshot);
+	}
+
+	public static String textFor(SniperState state) {
+		return STATUS_TEXT[state.ordinal()];
 	}
 
 }

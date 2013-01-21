@@ -1,47 +1,17 @@
 package wonyoung.goosauctionandroid;
 
-import java.util.ArrayList;
-
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
 	public class SniperStateDisplayer implements SniperListener {
-
-		@Override
-		public void sniperLost() {
-			showStatus(STATUS_LOST);
-		}
-
-		@Override
-		public void sniperBidding() {
-			showStatus(STATUS_BIDDING);
-		}
-
-		@Override
-		public void sniperWinning() {
-			showStatus(STATUS_WINNING);
-		}
-
-		@Override
-		public void sniperWon() {
-			showStatus(STATUS_WON);
-		}
-
 		@Override
 		public void sniperStateChanged(final SniperSnapShot sniperSnapShot) {
 			sniperStatusChanged(sniperSnapShot);
@@ -157,18 +127,7 @@ public class MainActivity extends Activity {
 		});		
 		thread.start();
 		
-		showStatus(STATUS_JOINING);
-	}
-
-	private void showStatus(String status) {
-		snipers.setStatusText(status);
-		
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				snipers.notifyDataSetChanged();
-			}
-		});
+//		showStatus(STATUS_JOINING);
 	}
 
 	private void sniperStatusChanged(SniperSnapShot sniperState) {
