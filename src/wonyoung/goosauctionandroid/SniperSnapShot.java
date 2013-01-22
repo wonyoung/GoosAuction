@@ -1,5 +1,8 @@
 package wonyoung.goosauctionandroid;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 public class SniperSnapShot {
 	public final String itemId;
 	public final int lastPrice;
@@ -16,40 +19,16 @@ public class SniperSnapShot {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
-		result = prime * result + lastBid;
-		result = prime * result + lastPrice;
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		return result;
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SniperSnapShot other = (SniperSnapShot) obj;
-		if (itemId == null) {
-			if (other.itemId != null)
-				return false;
-		} else if (!itemId.equals(other.itemId))
-			return false;
-		if (lastBid != other.lastBid)
-			return false;
-		if (lastPrice != other.lastPrice)
-			return false;
-		if (state != other.state)
-			return false;
-		return true;
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	public static SniperSnapShot joining(String itemId) {
-		return new SniperSnapShot(itemId, 0, 0, SniperState.JOINNING);
+		return new SniperSnapShot(itemId, 0, 0, SniperState.JOINING);
 	}
 
 	public SniperSnapShot bidding(int price, int bid) {
@@ -63,7 +42,4 @@ public class SniperSnapShot {
 	public SniperSnapShot closed() {
 		return new SniperSnapShot(itemId, lastPrice, lastBid, state.whenAuctionClosed());
 	}
-	
-	
-	// TODO: change equals() and hashcode() method with Apache common.lang
 }

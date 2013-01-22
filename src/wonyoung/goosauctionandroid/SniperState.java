@@ -1,7 +1,7 @@
 package wonyoung.goosauctionandroid;
 
 public enum SniperState {
-	JOINNING {
+	JOINING {
 		@Override
 		public SniperState whenAuctionClosed() { return LOST; }
 	},

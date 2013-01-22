@@ -20,7 +20,7 @@ public class SnipersTableModel extends ArrayAdapter<String> {
 		"Won"
 	};
 	private int resourceId;
-	private final SniperSnapShot STARTING_UP = new SniperSnapShot("", 0, 0, SniperState.JOINNING);
+	private final SniperSnapShot STARTING_UP = new SniperSnapShot("", 0, 0, SniperState.JOINING);
 	private ArrayList<String> texts;
 	private SniperSnapShot snapshot = STARTING_UP;
 	Context context;
@@ -44,7 +44,6 @@ public class SnipersTableModel extends ArrayAdapter<String> {
 		TextView itemIdTextView = (TextView) view.findViewById(R.id.item_id);
 		itemIdTextView.setText(snapshot.itemId);
 		
-		Log.d("AAAA", "[[["+snapshot.itemId+"]]]");
 		TextView lastPriceTextView = (TextView) view.findViewById(R.id.last_price);
 		lastPriceTextView.setText(Integer.toString(snapshot.lastPrice));
 		
