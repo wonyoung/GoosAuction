@@ -2,26 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/item_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         />
-    <TextView
-        android:id="@+id/last_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
-    <TextView
-        android:id="@+id/last_bid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
+        android:text="@string/item"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <TextView
         android:id="@+id/sniper_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         />        
+        android:text="@string/ready"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/last_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/last_bid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </LinearLayout>

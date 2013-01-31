@@ -30,10 +30,6 @@ public class ApplicationRunner {
 	public void stop() {
 	}
 
-	public void hasShownSniperIsBidding() {
-		driver.showSniperStatus(MainActivity.STATUS_BIDDING);
-	}
-
 	public void hasShownSniperIsBidding(int lastPrice, int lastBid) {
 		driver.showSniperStatus(itemId, lastPrice, lastBid,
 				MainActivity.STATUS_BIDDING);

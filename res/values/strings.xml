@@ -4,4 +4,6 @@
     <string name="app_name">GoosAuctionAndroid</string>
     <string name="hello_world">Ready</string>
     <string name="menu_settings">Settings</string>
+    <string name="item">Item</string>
+    <string name="ready">Ready</string>
 </resources>
